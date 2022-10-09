@@ -46,32 +46,33 @@ def main():
               'алфавитном порядке или в обратном алфавитном порядке\n5. limit - выводит '
               'только необходимое количество строк из запроса')
         user_input = input("Введите команду: ")
-        com = int(user_input)
-        if com == 1:
-            val = input('Ведите строку, по которой нужно будет фильтровать данные: ')
-            data = func_data(data, com, val)
-        elif com == 2:
-            val = input('Выберите нужную колонку данных: ')
-            data = func_data(data, com, val)
-        elif com == 3:
-            val = '-'
-            data = func_data(data, com, val)
-        elif com == 4:
-            val = input('Введите 1, если хотите вывести запрос в алфавитном порядке\nВведите 2, если хотите вывести '
-                        'запрос в обратном алфавитном порядке\nВвод: ')
-            if val == 1 or val == 2:
+        commands = user_input.split(' | ')
+        for com in commands:
+            if int(com) == 1:
+                val = input('Ведите строку, по которой нужно будет фильтровать данные: ')
+                data = func_data(data, com, val)
+            elif com == 2:
+                val = input('Выберите нужную колонку данных: ')
+                data = func_data(data, com, val)
+            elif com == 3:
+                val = '-'
+                data = func_data(data, com, val)
+            elif com == 4:
+                val = input('Введите 1, если хотите вывести запрос в алфавитном порядке\nВведите 2, если хотите вывести '
+                            'запрос в обратном алфавитном порядке\nВвод: ')
+                if val == 1 or val == 2:
+                    data = func_data(data, com, val)
+                else:
+                    print('Нужно было ввести 1 или 2\nПовторите запрос сначала.')
+            elif com == 5:
+                val = input('Введите необходимое количество строк запроса: ')
                 data = func_data(data, com, val)
             else:
-                print('Нужно было ввести 1 или 2\nПовторите запрос сначала.')
-        elif com == 5:
-            val = input('Введите необходимое количество строк запроса: ')
-            data = func_data(data, com, val)
-        else:
-            print('Не верно введенная команда\n')
-            exit()
-        if not data:
-            print('Не верно введенная команда\n')
-            exit()
+                print('Не верно введенная команда\n')
+                exit()
+            if not data:
+                print('Не верно введенная команда\n')
+                exit()
         for line in data:
             print(line)
 
